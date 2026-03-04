@@ -24,7 +24,7 @@ CMD0: 0x40 = 0 (start bit), 1 (transmission bit), 0x00 = 0b0000, 0 to 31 are stu
 1.	_SD_Init_CMD()_, send CMD bytes and returns status.
 2.	_getResponseTerminate()_, get response from slave and terminate the communication. We use transmitReceive, so that the master will send 0xFF and receive an output from the slave in return. _Receive_  will fail because the slave will assume the master wants to restart a session with 0x00 sent to the slave. It contains the terminateSPISession() function as well.
 3.	_terminateSPISession()_, transmits an extra 0xFF to end the conversation and pull the pin to high again (not necessary for this example but it works well even if you forgot to pull it high).
-4.	_getResponse()_, similar to to getResponseTerminate() but without the terminate function. _getResponse()_ and _getResponseTerminate()_ functions contain a dump function that allows debugging through UART. These functions will compare the the response to the first byte, known as expectedFirst, it is known as R1 responses in the specsheet. It will also receive extra bytes if needed.
+4.	_getResponse()_, similar to to getResponseTerminate() but without the terminate function. _getResponse()_ and _getResponseTerminate()_ functions contain a dump function that allows debugging through UART. These functions will compare the the response to the first byte, known as expectedFirst, it is known as R1 responses in the [specsheet](https://www.sdcard.org/downloads/pls/). It will also receive extra bytes if needed.
 # High Speed Transmission (SDHC Card)
 SDHC card supports high speed data transmission. We should also send CMD8 to initialize and confirm it. The bytes are 0x48, 0x00, 0x00, 0x01, 0xAA, 0x87. 
 
